@@ -30,31 +30,36 @@ class InvoiceApp:
         # Initialize grand_total_var
         self.grand_total_var = tk.StringVar()
 
-        # Initialize UI
-        self.init_ui()
-
         self.sales_tax_var = tk.StringVar()
         self.liquor_tax_var = tk.StringVar()
         self.total_with_tax_var = tk.StringVar()
 
+        # Create a frame for totals
+        self.totals_frame = tk.Frame(self.master)
+        self.totals_frame.pack(side=tk.TOP, padx=5, pady=5)
+
+        # Initialize UI
+        self.init_ui()
+
         # In your init_ui method, after creating the more_button
-        self.sales_tax_label = tk.Label(self.master, text="Sales Tax:")
-        self.sales_tax_label.pack(side=tk.TOP)
+        self.sales_tax_label = tk.Label(self.totals_frame, text="Sales Tax:")
+        self.sales_tax_label.grid(row=9, column=0)
 
-        self.sales_tax_entry = tk.Entry(self.master, textvariable=self.sales_tax_var, state='readonly')
-        self.sales_tax_entry.pack(side=tk.TOP)
+        self.sales_tax_entry = tk.Entry(self.totals_frame, textvariable=self.sales_tax_var, state='readonly')
+        self.sales_tax_entry.grid(row=9, column=1)
 
-        self.liquor_tax_label = tk.Label(self.master, text="Liquor Tax:")
-        self.liquor_tax_label.pack(side=tk.TOP)
+        self.liquor_tax_label = tk.Label(self.totals_frame, text="Liquor Tax:")
+        self.liquor_tax_label.grid(row=10, column=0)
 
-        self.liquor_tax_entry = tk.Entry(self.master, textvariable=self.liquor_tax_var, state='readonly')
-        self.liquor_tax_entry.pack(side=tk.TOP)
+        self.liquor_tax_entry = tk.Entry(self.totals_frame, textvariable=self.liquor_tax_var, state='readonly')
+        self.liquor_tax_entry.grid(row=10, column=1)
 
-        self.total_with_tax_label = tk.Label(self.master, text="Total (including tax):")
-        self.total_with_tax_label.pack(side=tk.TOP)
+        self.total_with_tax_label = tk.Label(self.totals_frame, text="Total (including tax):")
+        self.total_with_tax_label.grid(row=11, column=0)
 
-        self.total_with_tax_entry = tk.Entry(self.master, textvariable=self.total_with_tax_var, state='readonly')
-        self.total_with_tax_entry.pack(side=tk.TOP)
+        self.total_with_tax_entry = tk.Entry(self.totals_frame, textvariable=self.total_with_tax_var, state='readonly')
+        self.total_with_tax_entry.grid(row=11, column=1)
+
 
     def init_ui(self):
         try:
@@ -70,10 +75,6 @@ class InvoiceApp:
             # Add "More" button
             self.add_more_button = tk.Button(self.master, text="More", command=self.add_more_items)
             self.add_more_button.pack(side=tk.TOP)
-
-            # Create a frame for totals
-            self.totals_frame = tk.Frame(self.master)
-            self.totals_frame.pack(side=tk.TOP, padx=5, pady=5)
 
             # Sales Tax
             self.sales_tax_label = tk.Label(self.totals_frame, text="Sales Tax:")
